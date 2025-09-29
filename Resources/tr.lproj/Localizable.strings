@@ -1,0 +1,17 @@
+/* /Resources/tr.lproj/Localizable.strings */
+"title_calculator" = "Hesap Makinesi";
+"title_history" = "Geçmiş";
+"btn_clear_history" = "Geçmişi Temizle";
+"tab_calculator" = "Hesap";
+"tab_history" = "Geçmiş";
+
+"acc_digit" = "Rakam";
+"acc_decimal" = "Ondalık";
+"acc_plus_minus" = "Artı eksi";
+"acc_percent" = "Yüzde";
+"acc_clear" = "Temizle";
+"acc_equals" = "Eşittir";
+"acc_op" = "İşlem";
+
+"error_divide_by_zero" = "Sıfıra bölme yapılamaz";
+"error_unknown" = "Bilinmeyen hata";

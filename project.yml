@@ -1,0 +1,46 @@
+name: CalculatorCleanMVVM
+options:
+  bundleIdPrefix: com.example
+targets:
+  CalculatorCleanMVVM:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - App
+      - Presentation
+      - Shared
+      - Resources
+    dependencies:
+      - target: Domain
+      - target: Data
+    settings:
+      base:
+        INFOPLIST_FILE: Resources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.calculatorcleanmvvm
+        PRODUCT_NAME: CalculatorCleanMVVM
+        DEVELOPMENT_TEAM: ""
+  Domain:
+    type: framework
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - Domain
+  Data:
+    type: framework
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - Data
+    dependencies:
+      - target: Domain
+  CalculatorCleanMVVMTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - Tests
+    dependencies:
+      - target: Domain
+      - target: Data
+      - target: CalculatorCleanMVVM

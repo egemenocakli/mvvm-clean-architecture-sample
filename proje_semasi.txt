@@ -1,0 +1,56 @@
+CalculatorCleanMVVM/
+├─ App/                                 — Uygulamanın başladığı ve parçaların bağlandığı yer
+│  ├─ App.swift                         — SwiftUI giriş noktası; ekranda hangi sayfalar var belirler
+│  └─ DI/                               — DI = Dependency Injection (bağımlılıkları bir araya getirme)
+│     └─ Container.swift                — UseCase + Repository nesnelerini oluşturup birbirine bağlar
+│
+├─ Presentation/                        — Ekranda gördüğümüz kısım (UI) ve onun durumu (ViewModel)
+│  ├─ ViewModels/                       — Ekranların beyni; butona basınca ne olsun burada yazılı
+│  │  └─ CalculatorViewModel.swift      — Hesap makinesi ekranının işleyişi (rakam girişi, =, %, C, vb.)
+│  └─ Views/                            — Sadece görünüm; butonlar, textler, layout
+│     ├─ CalculatorView.swift           — Tuş takımı + ekran (display) görsel düzeni
+│     └─ HistoryView.swift              — Geçmişi listeleyen basit ekran
+│
+├─ Domain/                              — İş kuralları (UI’dan bağımsız, “temiz” kısım)
+│  ├─ Entities/                         — Basit veri tipleri / modeller (kurala uygun sade yapılar)
+│  │  ├─ CalculatorError.swift          — Örn: “sıfıra bölme” hatası burada tanımlı
+│  │  ├─ CalculatorOperation.swift      — İşlem tipleri: +, −, ×, ÷ (Domain’in dili)
+│  │  └─ HistoryItem.swift              — “3 × 5 = 15” gibi geçmiş satırının modeli
+│  ├─ Repositories/                     — Veri kaynağına erişim için sadece kurallar (protokol)
+│  │  ├─ CalculatorEngineRepository.swift — “İşlemi uygula” sözünü veren arayüz
+│  │  └─ HistoryRepository.swift        — “Geçmişi kaydet/oku/sil” arayüzü
+│  └─ UseCases/                         — Tek bir iş akışı: “hesapla ve gerekirse geçmişe yaz”
+│     ├─ EvaluateExpressionUseCase.swift — İşlemi yapar, sonucu formatlar, geçmişe ekler
+│     ├─ GetHistoryUseCase.swift        — Geçmişi getirir (yeni → eski sıralı)
+│     └─ ClearHistoryUseCase.swift      — Geçmişi temizler
+│
+├─ Data/                                — Gerçek dünya implementasyonları (UserDefaults, ağ, DB…)
+│  └─ Repositories/
+│     ├─ InMemoryCalculatorEngineRepository.swift — Toplama/çıkarma/… işlemini gerçekten yapar
+│     └─ UserDefaultsHistoryRepository.swift      — Geçmişi cihazda saklar/okur/siler
+│
+├─ Shared/                              — Ortak sabitler ve minik yardımcılar
+│  └─ Constants.swift                   — UI ölçüleri, ondalık ayırıcı vb.
+│
+├─ Resources/                           — Uygulama kaynakları (plist, çok dil, ikonlar…)
+│  ├─ Assets.xcassets/
+│  │  └─ AppIcon.appiconset/Contents.json — Uygulama ikonları tanımı
+│  ├─ Info.plist                        — iOS uygulama ayarları
+│  ├─ en.lproj/Localizable.strings      — İngilizce metinler
+│  └─ tr.lproj/Localizable.strings      — Türkçe metinler
+│
+├─ Tests/                               — Otomatik testler (güvenli geliştirme)
+│  └─ CalculatorTests.swift             — Örn: 2+3=5, sıfıra bölme hatası fırlar mı?
+│
+├─ README.md                            — Proje açıklaması, nasıl çalıştırılır
+└─ project.yml                          — XcodeGen ile projeyi üretme dosyası (opsiyonel)
+
+GENEL ÖZET:
+
+view->viewmodel->useCase->repositories->db/service/cache
+Bizim bildiğimiz ancak bu yapıda değişen anlamlar:
+
+-Model: Bu yapıda kaynaklardan verileri çekerken kullandığımız atama map/json işlemleri
+modeller ile kullanılıyor. Buradan sonra örn: kullanıcı bilgisi bir modele değil Entitie olarak metodlara veriliyor.
+Yani kullanıcı bilgileri artık modellerde değil entitie lerde yani bu bilgi buradaki metodların içinde tuluyor.
+-Entities= ui içinde kullandığın modeller aslında entities oluyor. Burada bilgiler direkt olarak modellerin değil metodların içinde tutuluyor.

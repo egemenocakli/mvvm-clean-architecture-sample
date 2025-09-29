@@ -1,0 +1,17 @@
+/* /Resources/en.lproj/Localizable.strings */
+"title_calculator" = "Calculator";
+"title_history" = "History";
+"btn_clear_history" = "Clear History";
+"tab_calculator" = "Calculator";
+"tab_history" = "History";
+
+"acc_digit" = "Digit";
+"acc_decimal" = "Decimal";
+"acc_plus_minus" = "Plus or minus";
+"acc_percent" = "Percent";
+"acc_clear" = "Clear";
+"acc_equals" = "Equals";
+"acc_op" = "Operator";
+
+"error_divide_by_zero" = "Cannot divide by zero";
+"error_unknown" = "Unknown error";
